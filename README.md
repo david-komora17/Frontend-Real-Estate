@@ -21,7 +21,7 @@ This project addresses the complexities of modern real estate by replacing scatt
 * Pro-Tip for your README:
 ### How to get started
 <code>
-git clone <https://github.com/david-komora17/Frontend-Real-Estate.git>
+git clone <[text](https://github.com/david-komora17/Frontend-Real-Estate.git)>
 npm install
 npm run dev
 </code>
