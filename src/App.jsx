@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./context/AuthContext";
 import Home from "./pages/Home";
 import ManageListings from "./pages/ManageListings";
@@ -12,7 +12,8 @@ function App() {
   return (
     <AuthProvider>
         <Routes>
-            <Route path="/login" element= {<login/>}/>
+            <Route path="/" element= {<Home/>}/>
+            <Route path="/login" element= {<Login/>}/>
           <Route element = {<ProtectedRoute allowedRoles={['user', 'admin']}/>}>
               <Route path="/dashboard" element= {<userDashboard/>}/>
               <Route path="/booking" element= {<BookingCalendar/>}/>

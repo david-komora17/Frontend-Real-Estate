@@ -10,8 +10,8 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: VITE_FIREBASE_API_KEY,
-  authDomain: VITE_FIREBASE_AUTH_DOMAIN,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: "frontend-real-estate",
   storageBucket: "frontend-real-estate.firebasestorage.app",
   messagingSenderId: "792976618668",
