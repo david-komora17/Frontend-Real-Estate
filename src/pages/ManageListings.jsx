@@ -13,6 +13,18 @@ const ManageListings = () => {
     setProperties(data);
    };
 
+   const generateAIDescription = async (title) => {
+    const descriptions = [
+        `Experience luxury living at this ${title}, featuring modern amenities and breathtaking views.`,
+        `A charming and spacious ${title} located in a prime neighborhood, perfect for families.`,
+        `Modern elegance meets comfort in this stunning ${title}. A must-see!`,
+    ];
+
+    const randomDesc = descriptions[Math.floor(Math.random() * descriptions.length)];
+    setForm({...form, description: randomDesc});
+    return descriptions[Math.floor(Math.random() * descriptions.length)];
+   }
+
    useEffect(() => {fetchRentals();}, []);
 
    const handleSubmit = async (e) => {
@@ -27,8 +39,12 @@ const ManageListings = () => {
     };
     
     return (
-        <div className="p-8 bg-gray-50 min-h-screen style={{backgroundImage: `url(${heroImage})`}} ">
-            <h1 className="text-2xl mb-6">Property Listings</h1>
+        <div className="p-8 bg-gray-50 min-h-screen" style={{backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+            <h1 className="text-2xl mb-6 text-white text-center">
+                Property Listings  
+                <button type = "button" onClick={() => generateAIDescription(form.title)} className="text-xs bg-purple-500  text-white px-2 py-1 rounded">Uliza...</button>  
+            </h1>
+
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md mb-8 grid grid-cols-3 gap-4">
                 <label htmlFor="">Property Title</label><br />
                 <input className="border p-2 rounded" placeholder="Title" value = {form.title} 

@@ -11,6 +11,7 @@ function BookingCalendar() {
     const bookingsArray = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
     setBookings(bookingsArray);    
     })
+   
 
     return () => unsubscribe();
   }, []);
