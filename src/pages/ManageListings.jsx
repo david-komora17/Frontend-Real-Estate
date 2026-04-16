@@ -2,45 +2,16 @@ import {useState, useEffect} from "react"
 import { db } from "../firebase/config";
 import { collection, addDoc, getDocs } from "firebase/firestore"
 import heroImage from '../assets/bathroom1.jpg'
-import { enhanceDescription } from "../utils/aiService";
 
 const ManageListings = () => {
    const [properties, setProperties] = useState([]);
-   const [form, setForm] = useState({title: "", price: "", location: ""});
-   const [aiLoading, setAiLoading] = useState(false);
+   const [form, setForm] = useState({title: "", price: "", location: "", description: ""});
 
-   const handleAIEnhance = async () => {
-    if (!form.title || !form.location) {
-        return alert('Please enter a title and location first.')
-    }
-    setAiLoading(true);
-    
-    try {
-        const aiText = await enhanceDescription(form.title, form.description);
-        setForm({...form, description: aiText})
-    } catch (error) {
-        console.error("AI error", error);
-    } finally {
-        setAiLoading(false);
-    }
-   }
    const fetchRentals = async () => {
     const querySnapshot = await getDocs(collection(db, "rentals"));
     const data = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
     setProperties(data);
    };
-
-   const generateAIDescription = async (title) => {
-    const descriptions = [
-        `Experience luxury living at this ${title}, featuring modern amenities and breathtaking views.`,
-        `A charming and spacious ${title} located in a prime neighborhood, perfect for families.`,
-        `Modern elegance meets comfort in this stunning ${title}. A must-see!`,
-    ];
-
-    const randomDesc = descriptions[Math.floor(Math.random() * descriptions.length)];
-    setForm({...form, description: randomDesc});
-    return descriptions[Math.floor(Math.random() * descriptions.length)];
-   }
 
    useEffect(() => {fetchRentals();}, []);
 
@@ -54,14 +25,18 @@ const ManageListings = () => {
             console.error("Save failed", error);
         }
     };
+
+    const handleAIEnhance = async () => {
+    if (!form.title) return alert("Enter a title first!");
+    setAiLoading(true);
+    const aiText = await enhanceDescription(form.title, form.location);
+    setForm({ ...form, description: aiText });
+    setAiLoading(false);
+};
     
     return (
-        <div className="p-8 bg-gray-50 min-h-screen" style={{backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-            <h1 className="text-2xl mb-6 text-white text-center">
-                Property Listings  
-                <button type = "button" onClick={() => generateAIDescription(form.title)} className="text-xs bg-purple-500  text-white px-2 py-1 rounded">Uliza...</button>  
-            </h1>
-
+        <div className="p-8 bg-gray-50 min-h-screen style={{backgroundImage: `url(${heroImage})`}} ">
+            <h1 className="text-2xl mb-6">Property Listings</h1>
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md mb-8 grid grid-cols-3 gap-4">
                 <label htmlFor="">Property Title</label><br />
                 <input className="border p-2 rounded" placeholder="Title" value = {form.title} 

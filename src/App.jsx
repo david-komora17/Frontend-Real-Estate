@@ -8,24 +8,27 @@ import UserBookings from "./pages/UserBookings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginForm from "./components/LoginForm";
 import BookingCalendar from "./components/BookingCalendar";
-import AdminRoutes from "./components/AdminRoutes";
  
 
 function App() {
   return (
     <AuthProvider>
         <Routes>
+          {/* Public Routes */}
             <Route path="/" element= {<Home/>}/>
             <Route path="/login" element= {<LoginForm/>}/>
             <Route path="/register" element= {<RegisterForm/>}/>
-            <Route path="/listings" element= {<ManageListings/>}/>
+            <Route path="/property/:id" element= {<PropertyDetails/>}/>
 
+            <Route path="/listings" element= {<ManageListings/>}/>
+          {/*user and admin routes*/}
           <Route element = {<ProtectedRoute allowedRoles={['user', 'admin']}/>}>
-              <Route path="/dashboard" element= {<userDashboard/>}/>
+              <Route path="/dashboard" element= {<UserBookings/>}/>
               <Route path="/booking" element= {<BookingCalendar/>}/>
           </Route>
+          {/*Admin only routes*/}
           <Route element = {<ProtectedRoute allowedRoles = {['admin']}/>}>
-              <Route path="/admin" element= {<AdminRoutes/>}/>
+            <Route path="/listings" element= {<ManageListings/>}/>
           </Route>
         </Routes>
     </AuthProvider>
