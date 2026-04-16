@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import {doc, getDoc} from 'firebase/firestore';
-import {useDispatch} from 'react';
+import {useDispatch} from 'react-redux';
 import {auth, db} from '../firebase/config';
 import {setAuth, clearAuth} from '../store/authSlice';
 
