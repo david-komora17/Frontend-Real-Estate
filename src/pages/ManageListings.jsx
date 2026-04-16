@@ -26,15 +26,18 @@ const ManageListings = () => {
     };
     
     return (
-        <div className="p-8 bg-gray-50 min-h-screen">
-            <h1 className="text-2xl font-bold mb-6">Property Management</h1>
+        <div className="p-8 bg-gray-50 min-h-screen ">
+            <h1 className="text-2xl mb-6">Property Listings</h1>
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md mb-8 grid grid-cols-3 gap-4">
+                <label htmlFor="">Property Title</label><br />
                 <input className="border p-2 rounded" placeholder="Title" value = {form.title} 
-                onChange={e => setForm({...form, title: e.target.value})} required/>
-                <input className="border p-2 rounded" placeholder="Price" value = {form.price} 
-                onChange={e => setForm({...form, price: e.target.value})} required/>
+                onChange={e => setForm({...form, title: e.target.value})} required/> 
 
-                <button type="submit" className="bg-blue-600 text-white rounded hover:bg-blue-700">
+                <label htmlFor="">Property Price</label> <br />
+                <input className="border p-2 rounded" placeholder="Price" value = {form.price} 
+                onChange={e => setForm({...form, price: e.target.value})} required/>  
+
+                <button type="submit" className="bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer">
                     Add listing
                 </button>
             </form>

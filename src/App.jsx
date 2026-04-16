@@ -16,7 +16,10 @@ function App() {
     <AuthProvider>
         <Routes>
             <Route path="/" element= {<Home/>}/>
-            <Route path="/loginForm" element= {<LoginForm/>}/>
+            <Route path="/login" element= {<LoginForm/>}/>
+            <Route path="/register" element= {<RegisterForm/>}/>
+            <Route path="/listings" element= {<ManageListings/>}/>
+
           <Route element = {<ProtectedRoute allowedRoles={['user', 'admin']}/>}>
               <Route path="/dashboard" element= {<userDashboard/>}/>
               <Route path="/booking" element= {<BookingCalendar/>}/>
