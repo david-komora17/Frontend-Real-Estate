@@ -8,9 +8,12 @@ function BookingCalendar() {
   useEffect( () => {
     const q = query(collection( db, "bookings"))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const bookingsArray = querySnapshot.docs.map(doc => ({}))    
+    const bookingsArray = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+    setBookings(bookingsArray);    
     })
-  } )
+
+    return () => unsubscribe();
+  }, []);
   
     return (
     <div>BookingCalendar</div>

@@ -37,7 +37,7 @@ function RegisterForm() {
             <input type="email" placeholder='komoradavid473@gmail.com' className='p-2 w-full mb-4 border rounded'
             onChange={(e) => setEmail(e.target.value)} required/>
             <input type="password" placeholder='password' className='p-2 w-full mb-4 border rounded'
-            onChange={(e) => setEmail(e.target.value)} required/>
+            onChange={(e) => setPassword(e.target.value)} required/>
             <button type = 'submit' className='w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700'>
                 Register
             </button>

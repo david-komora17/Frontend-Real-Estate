@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react"
 import { db } from "../firebase/config";
 import { collection, addDoc, getDocs } from "firebase/firestore"
+import heroImage from '../assets/bathroom1.jpg'
 
 const ManageListings = () => {
    const [properties, setProperties] = useState([]);
@@ -26,7 +27,7 @@ const ManageListings = () => {
     };
     
     return (
-        <div className="p-8 bg-gray-50 min-h-screen ">
+        <div className="p-8 bg-gray-50 min-h-screen style={{backgroundImage: `url(${heroImage})`}} ">
             <h1 className="text-2xl mb-6">Property Listings</h1>
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md mb-8 grid grid-cols-3 gap-4">
                 <label htmlFor="">Property Title</label><br />
