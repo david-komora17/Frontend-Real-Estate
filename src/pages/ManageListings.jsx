@@ -2,11 +2,28 @@ import {useState, useEffect} from "react"
 import { db } from "../firebase/config";
 import { collection, addDoc, getDocs } from "firebase/firestore"
 import heroImage from '../assets/bathroom1.jpg'
+import { enhanceDescription } from "../utils/aiService";
 
 const ManageListings = () => {
    const [properties, setProperties] = useState([]);
    const [form, setForm] = useState({title: "", price: "", location: ""});
+   const [aiLoading, setAiLoading] = useState(false);
 
+   const handleAIEnhance = async () => {
+    if (!form.title || !form.location) {
+        return alert('Please enter a title and location first.')
+    }
+    setAiLoading(true);
+    
+    try {
+        const aiText = await enhanceDescription(form.title, form.description);
+        setForm({...form, description: aiText})
+    } catch (error) {
+        console.error("AI error", error);
+    } finally {
+        setAiLoading(false);
+    }
+   }
    const fetchRentals = async () => {
     const querySnapshot = await getDocs(collection(db, "rentals"));
     const data = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
