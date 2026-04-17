@@ -65,7 +65,7 @@ function Dashboard() {
                     <h3 className="text-xl font-bold text-gray-800 mb-4">Account Overview</h3>
                     <div className="flex gap-4">
                         <div className="bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm font-bold">● System Active</div>
-                        <div className="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm font-bold">● Firebase Connected</div>
+                        <div className="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm font-bold">● User logged in</div>
                     </div>
                 </div>
             </div>
