@@ -25,9 +25,7 @@ function Dashboard() {
                         <h1 className="text-3xl font-black tracking-tight">User Portal</h1>
                         <p className="text-blue-400 font-medium">Welcome back, {user?.email}</p>
                     </div>
-                    <button onClick={handleLogout} className="bg-red-500/20 border border-red-500/50 px-6 py-2 rounded-xl text-red-200 font-bold hover:bg-red-500/40 transition">
-                        Logout
-                    </button>
+                   
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

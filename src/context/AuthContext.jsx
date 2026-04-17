@@ -3,7 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import {doc, getDoc} from 'firebase/firestore';
 import {useDispatch} from 'react-redux';
 import {auth, db} from '../firebase/config';
-import {setAuth, clearAuth} from '../store/authSlice';
+import {setAuth, logout} from '../store/authSlice.js';
 
 const AuthContext = createContext(); 
 
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
                     role: userData?.role || 'user'
                 }));
             } else {
-                dispatch(clearAuth());
+                dispatch(logout());
             }
         });
 

@@ -42,7 +42,7 @@ const ManageListings = () => {
             console.error("Gemini AI Error:", error);
             alert("AI generation failed. Check your API key or network.");
         } finally {
-            setAiLoading(false); // Hide the loading indicator
+            setAiLoading(false); 
         }
     };
 

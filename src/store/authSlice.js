@@ -14,7 +14,7 @@ const authSlice = createSlice({
             state.role = action.payload.role;
             state.loading = false;
         },
-        clearAuth: (state) => {
+        logout: (state) => {
             state.user = null;
             state.role = null;
             state.loading = false;
@@ -25,5 +25,5 @@ const authSlice = createSlice({
     },
 });
 
-export const {setAuth, clearAuth, setLoading} = authSlice.actions;
+export const {setAuth, logout, setLoading} = authSlice.actions;
 export default authSlice.reducer;
