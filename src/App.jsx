@@ -4,10 +4,11 @@ import Home from "./pages/Home";
 import ManageListings from "./pages/ManageListings";
 import PropertyDetails from "./pages/PropertyDetails";
 import RegisterForm from "./pages/RegisterForm";
-import UserBookings from "./pages/UserBookings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginForm from "./components/LoginForm";
 import BookingCalendar from "./components/BookingCalendar";
+import PropertyList from "./components/PropertyList";
+import Dashboard from "./pages/Dashboard";
  
 
 function App() {
@@ -19,12 +20,14 @@ function App() {
             <Route path="/login" element= {<LoginForm/>}/>
             <Route path="/register" element= {<RegisterForm/>}/>
             <Route path="/property/:id" element= {<PropertyDetails/>}/>
+            <Route path="/properties" element= {<PropertyList/>}/>
+
 
             <Route path="/listings" element= {<ManageListings/>}/>
           {/*user and admin routes*/}
           <Route element = {<ProtectedRoute allowedRoles={['user', 'admin']}/>}>
-              <Route path="/dashboard" element= {<UserBookings/>}/>
               <Route path="/booking" element= {<BookingCalendar/>}/>
+              <Route path="/dashboard" element= {<Dashboard/>}/>
           </Route>
           {/*Admin only routes*/}
           <Route element = {<ProtectedRoute allowedRoles = {['admin']}/>}>
