@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {AuthProvider} from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import ManageListings from "./pages/ManageListings";
 import PropertyDetails from "./pages/PropertyDetails";
@@ -10,36 +10,34 @@ import BookingCalendar from "./components/BookingCalendar";
 import PropertyList from "./components/PropertyList";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
- 
 
 function App() {
-  return (
-    <AuthProvider>
-        <Navbar/>
-          <main className="pt-20">
-            <Routes>
-              {/* Public Routes */}
-                <Route path="/" element= {<Home/>}/>
-                <Route path="/login" element= {<LoginForm/>}/>
-                <Route path="/register" element= {<RegisterForm/>}/>
-                <Route path="/property/:id" element= {<PropertyDetails/>}/>
-                <Route path="/properties" element= {<PropertyList/>}/>
+    return (
+        <AuthProvider>
+            <Navbar />
+            <main className="pt-20">
+                <Routes>
+                    {/* Public Routes */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/register" element={<RegisterForm />} />
+                    <Route path="/property/:id" element={<PropertyDetails />} />
+                    <Route path="/properties" element={<PropertyList />} />
 
+                    {/* User + Admin Routes */}
+                    <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}>
+                        <Route path="/booking" element={<BookingCalendar />} />
+                        <Route path="/dashboard" element={<Dashboard />} />
+                    </Route>
 
-                <Route path="/listings" element= {<ManageListings/>}/>
-              {/*user and admin routes*/}
-              <Route element = {<ProtectedRoute allowedRoles={['user', 'admin']}/>}>
-                  <Route path="/booking" element= {<BookingCalendar/>}/>
-                  <Route path="/dashboard" element= {<Dashboard/>}/>
-              </Route>
-              {/*Admin only routes*/}
-              <Route element = {<ProtectedRoute allowedRoles = {['admin']}/>}>
-                <Route path="/listings" element= {<ManageListings/>}/>
-              </Route>
-            </Routes>
-          </main>
-    </AuthProvider>
-  )
+                    {/* Admin Only Routes */}
+                    <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                        <Route path="/listings" element={<ManageListings />} />
+                    </Route>
+                </Routes>
+            </main>
+        </AuthProvider>
+    );
 }
 
-export default App
+export default App;

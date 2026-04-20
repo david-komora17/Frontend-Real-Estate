@@ -25,14 +25,14 @@ function Navbar() {
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 
                 {/* Brand / Logo */}
-                <Link to="/" className="text-2xl font-black text-white tracking-tighter hover:opacity-80 transition">
+                <Link to="/" className="text-2xl font-black text-purple tracking-tighter hover:opacity-80 transition">
                     REALTY<span className="text-blue-500 font-light italic">App</span>
                 </Link>
 
                 {/* Navigation Menu */}
                 <div className="flex items-center space-x-8">
                     {/* Public Link */}
-                    <Link to="/properties" className="text-gray-200 hover:text-white font-medium transition text-sm uppercase tracking-wider">
+                    <Link to="/properties" className="text-black-200 hover:text-white font-medium transition text-sm uppercase tracking-wider">
                         Browse Homes
                     </Link>
 
