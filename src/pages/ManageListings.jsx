@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { db, auth } from "../firebase/config";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore"; // ADDED updateDoc
 import { deleteUser } from "firebase/auth";
-import { enhanceDescription } from "../utils/aiService";
-import heroImage from '../assets/bathroom1.jpg';
+import { enhanceDescription, generatePropertyTitle, getLocationInsights, generateFeatures } from "../utils/aiService";import heroImage from '../assets/bathroom1.jpg';
 import SeedDataButton from '../components/SeedDataButton';
 
 
@@ -11,6 +10,7 @@ const ManageListings = () => {
     const [properties, setProperties] = useState([]);
     const [aiLoading, setAiLoading] = useState(false);
     const [editingId, setEditingId] = useState(null); 
+    const [aiFeatureLoading, setAiFeatureLoading] = useState({});
     const [form, setForm] = useState({ title: "", price: "", location: "", address: "", description: "", imageUrl: "", bedrooms: "", type: "" });
 
     const fetchRentals = async () => {
@@ -90,20 +90,71 @@ const ManageListings = () => {
         }
     };
 
+    const handleAITitle = async () => {
+        if (!form.location || !form.type || !form.bedrooms) {
+            return alert("Please enter Location, Type, and Bedrooms first!");
+        }
+        
+        setAiFeatureLoading(prev => ({ ...prev, title: true }));
+        try {
+            const aiTitle = await generatePropertyTitle(form.location, form.type, form.bedrooms);
+            setForm(prev => ({ ...prev, title: aiTitle }));
+        } catch (error) {
+            alert("Title generation failed");
+        } finally {
+            setAiFeatureLoading(prev => ({ ...prev, title: false }));
+        }
+    };
+        // Enhanced AI function
     const handleAIEnhance = async () => {
         if (!form.title || !form.location) {
             return alert("Please enter a Title and Location first!");
         }
+        
         setAiLoading(true);
         try {
-            const aiText = await enhanceDescription(form.title, form.location);
-            setForm({ ...form, description: aiText });
+            const aiText = await enhanceDescription(form.title, form.location, {
+                bedrooms: form.bedrooms,
+                price: form.price,
+                type: form.type
+            });
+            
+            setForm(prev => ({ ...prev, description: aiText }));
+            
+            // Also get location insights if address is empty
+            if (!form.address) {
+                const insights = await getLocationInsights(form.location);
+                setForm(prev => ({ ...prev, address: `${form.title}, ${form.location}, Nairobi - ${insights}` }));
+            }
+            
         } catch (error) {
-            alert("AI generation failed. Check API key.");
+            console.error("AI generation failed:", error);
+            alert("AI generation failed. Check your API key and ensure Gemini API is enabled.");
         } finally {
             setAiLoading(false);
         }
     };
+
+    const handleAIFeatures = async () => {
+        if (!form.type || !form.bedrooms) {
+            return alert("Please enter Property Type and Bedrooms first!");
+        }
+        
+        setAiFeatureLoading(prev => ({ ...prev, features: true }));
+        try {
+            const features = await generateFeatures(form.type, form.bedrooms, form.bathrooms || 2);
+            const featuresText = features.join('\n');
+            setForm(prev => ({ 
+                ...prev, 
+                description: prev.description ? `${prev.description}\n\n${featuresText}` : featuresText 
+            }));
+        } catch (error) {
+            alert("Features generation failed");
+        } finally {
+            setAiFeatureLoading(prev => ({ ...prev, features: false }));
+        }
+    };
+
 
     return (
         <div className="min-h-screen bg-cover bg-fixed bg-center p-6 relative" style={{ backgroundImage: `url(${heroImage})` }}>
@@ -165,6 +216,27 @@ const ManageListings = () => {
                             <div>
                                 <label className="text-[10px] font-bold uppercase text-gray-400 ml-2">Image URL</label>
                                 <input className="w-full p-4 bg-gray-50 border-none rounded-2xl" placeholder="https://example.com/photo.jpg" value={form.imageUrl} onChange={e => setForm({...form, imageUrl: e.target.value})} />
+                            </div>
+
+                                                        {/* After the Image URL field, add these buttons */}
+                            <div className="grid grid-cols-2 gap-3">
+                                <button 
+                                    type="button" 
+                                    onClick={handleAITitle}
+                                    disabled={aiFeatureLoading.title}
+                                    className="bg-purple-600 text-white p-3 rounded-2xl text-sm font-bold hover:bg-purple-700 transition-all"
+                                >
+                                    {aiFeatureLoading.title ? "✨ Generating..." : "✨ AI Title Generator"}
+                                </button>
+                                
+                                <button 
+                                    type="button" 
+                                    onClick={handleAIFeatures}
+                                    disabled={aiFeatureLoading.features}
+                                    className="bg-indigo-600 text-white p-3 rounded-2xl text-sm font-bold hover:bg-indigo-700 transition-all"
+                                >
+                                    {aiFeatureLoading.features ? "⚡ Generating..." : "⚡ AI Features"}
+                                </button>
                             </div>
                             
                             <button type="button" onClick={handleAIEnhance} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-3 rounded-2xl text-sm font-bold hover:scale-[1.02] transition-all shadow-lg">
