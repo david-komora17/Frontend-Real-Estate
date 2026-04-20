@@ -4,6 +4,8 @@ import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase
 import { deleteUser } from "firebase/auth";
 import { enhanceDescription } from "../utils/aiService";
 import heroImage from '../assets/bathroom1.jpg';
+import SeedDataButton from '../components/SeedDataButton';
+
 
 const ManageListings = () => {
     const [properties, setProperties] = useState([]);
@@ -108,14 +110,14 @@ const ManageListings = () => {
             <div className="bg-black/60 fixed inset-0 z-0"></div> 
             
             <div className="relative z-10 max-w-7xl mx-auto">
-                <div className="flex justify-between items-center mb-10">
+                <div className="flex justify-between items-center mb-10 flex-wrap gap-4">
                     <h1 className="text-4xl font-black text-white tracking-tight">Management Console</h1>
-                    <button 
-                        onClick={handleDeleteAccount}
-                        className="text-red-400 hover:text-red-200 text-xs font-bold uppercase tracking-widest border border-red-400/30 px-4 py-2 rounded-full transition"
-                    >
-                        Delete My Account
-                    </button>
+                    <div className="flex gap-3">
+                        <SeedDataButton />  {/* Add this line */}
+                        <button onClick={handleDeleteAccount} className="text-red-400 hover:text-red-200 text-xs font-bold uppercase tracking-widest border border-red-400/30 px-4 py-2 rounded-full transition">
+                            Delete My Account
+                        </button>
+                    </div>
                 </div>
                 
                 <div className="grid lg:grid-cols-12 gap-10">
