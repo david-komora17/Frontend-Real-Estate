@@ -66,8 +66,7 @@ function PropertyList() {
         <div className="min-h-screen bg-cover bg-center bg-fixed p-6 md:p-12" 
              style={{ backgroundImage: `url(${heroImage})` }}>
             
-            <div className="absolute inset-0 bg-black/60 z-0"></div>
-
+            <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
             <div className="relative z-10 max-w-7xl mx-auto">
                 {/* Header & Search */}
                 <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">

@@ -9,8 +9,7 @@ function Home() {
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Dark Overlay for Depth */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
-
+      <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
       {/* Main Glass Container */}
       <div className="relative z-10 max-w-2xl w-full mx-4 my-20 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[40px] shadow-2xl text-center md:p-12">
         

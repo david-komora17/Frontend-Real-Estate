@@ -50,9 +50,9 @@ function LoginForm() {
         <div className="min-h-screen flex items-center justify-center bg-cover bg-center" 
              style={{ backgroundImage: `url(${heroImage})` }}>
             
-            <div className="absolute inset-0 bg-black/60 z-0"></div>
+            <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
 
-            <div className="relative z-10 w-full max-w-md p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl">
+            <div className="relative z-10 w-full max-w-md p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl mt-4">
                 <h2 className="text-3xl font-bold text-white text-center mb-8">Welcome Back</h2>
                 
                 {error && (
@@ -112,13 +112,9 @@ function LoginForm() {
                 </p>
                 
                 {/* Role Info Box */}
-                <div className="mt-6 p-3 bg-white/5 rounded-xl border border-white/10">
-                    <p className="text-xs text-gray-400 text-center">
-                            <span className="font-bold">Buyers/Tenants</span> - Browse and book viewings<br/>
-                            <span className="font-bold">Agents/Admins</span> - Manage property listings
-                    </p>
-                </div>
+                
             </div>
+            
         </div>
     );
 }

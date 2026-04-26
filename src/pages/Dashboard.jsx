@@ -16,7 +16,7 @@ function Dashboard() {
 
     return (
         <div className="min-h-screen bg-cover bg-center bg-fixed p-6" style={{ backgroundImage: `url(${heroImage})` }}>
-            <div className="absolute inset-0 bg-black/60 z-0"></div>
+            <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
 
             <div className="relative z-10 max-w-5xl mx-auto">
                 {/* Header Section */}

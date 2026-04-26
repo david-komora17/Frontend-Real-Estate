@@ -158,7 +158,7 @@ const ManageListings = () => {
 
     return (
         <div className="min-h-screen bg-cover bg-fixed bg-center p-6 relative" style={{ backgroundImage: `url(${heroImage})` }}>
-            <div className="bg-black/60 fixed inset-0 z-0"></div> 
+            <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
             
             <div className="relative z-10 max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-10 flex-wrap gap-4">

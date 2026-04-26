@@ -24,16 +24,16 @@ function Navbar() {
     const linkStyle = "text-white/80 hover:text-white font-semibold transition-all duration-300 text-sm uppercase tracking-wider";
 
     return (
-        <nav className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10 px-8 py-4 shadow-2xl">
+        <nav className="fixed top-0 w-full z-[100] bg-black/60 backdrop-blur-lg px-8 py-4 shadow-2xl h-20">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 
                 {/* Brand / Logo */}
-                <Link to="/" className="text-2xl font-black text-white tracking-tighter hover:scale-105 transition-transform">
+                <Link to="/" className="text-2xl font-black text-white tracking-tighter hover:scale-105 transition-transform ">
                     REALTY<span className="text-blue-400 font-light italic">App</span>
                 </Link>
 
                 {/* Navigation Menu */}
-                <div className="flex items-center space-x-8">
+                <div className="flex space-x-8 items-center pt-2">
                     {/* Public Link */}
                     <Link to="/properties" className={linkStyle}>
                         Browse Homes

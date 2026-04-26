@@ -38,7 +38,7 @@ function PropertyDetails() {
 
     return (
         <div className="min-h-screen bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${heroImage})` }}>
-            <div className="absolute inset-0 bg-black/60 z-0"></div>
+            <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
             <div className="relative z-10 max-w-4xl mx-auto p-6">
                 <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl overflow-hidden">
                     <div className="h-96 bg-gradient-to-br from-gray-700 to-gray-900 relative">

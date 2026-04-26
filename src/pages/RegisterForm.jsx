@@ -94,7 +94,7 @@ function RegisterForm() {
              style={{ backgroundImage: `url(${heroImage})` }}>
             
             {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/60 z-0"></div>
+            <div className="fixed inset-0 bg-black/50 z-0 backdrop-brightness-75"></div>
 
             <div className="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-3xl shadow-2xl">
                 <div className="text-center mb-8">
