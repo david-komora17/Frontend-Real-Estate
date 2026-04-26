@@ -47,12 +47,12 @@ function Dashboard() {
                             {/* Conditional Admin Link */}
                             {role === 'admin' && (
                                 <Link to="/listings" className="p-4 bg-purple-600/40 border border-white/20 rounded-2xl hover:bg-purple-600/60 transition text-center font-bold">
-                                     Manage Listings (Admin)
+                                    Manage Listings (Admin)
                                 </Link>
                             )}
 
-                            <Link to="/dashboard" className="p-4 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition text-center font-bold">
-                                 My Bookings
+                            <Link to="/my-bookings" className="p-4 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition text-center font-bold">
+                                My Bookings
                             </Link>
                         </div>
                     </div>

@@ -226,7 +226,7 @@ const ManageListings = () => {
                                     disabled={aiFeatureLoading.title}
                                     className="bg-purple-600 text-white p-3 rounded-2xl text-sm font-bold hover:bg-purple-700 transition-all"
                                 >
-                                    {aiFeatureLoading.title ? "✨ Generating..." : "✨ AI Title Generator"}
+                                    {aiFeatureLoading.title ? " Generating..." : " AI Title Generator"}
                                 </button>
                                 
                                 <button 
@@ -235,12 +235,12 @@ const ManageListings = () => {
                                     disabled={aiFeatureLoading.features}
                                     className="bg-indigo-600 text-white p-3 rounded-2xl text-sm font-bold hover:bg-indigo-700 transition-all"
                                 >
-                                    {aiFeatureLoading.features ? "⚡ Generating..." : "⚡ AI Features"}
+                                    {aiFeatureLoading.features ? " Generating..." : " AI Features"}
                                 </button>
                             </div>
                             
                             <button type="button" onClick={handleAIEnhance} className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-3 rounded-2xl text-sm font-bold hover:scale-[1.02] transition-all shadow-lg">
-                                {aiLoading ? "Gemini is writing..." : "✨ Auto-Generate Description"}
+                                {aiLoading ? "Gemini is writing..." : " Auto-Generate Description"}
                             </button>
 
                             <div>

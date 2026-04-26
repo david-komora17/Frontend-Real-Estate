@@ -11,16 +11,48 @@ function PropertyList() {
 
     useEffect(() => {
         const fetchProperties = async () => {
+            setLoading(true);
+            
+            // Try RentCast API first (silent background)
+            try {
+                const results = await searchRentals('Nairobi, Kenya', 500, 5000);
+                
+                if (results && results.length > 0) {
+                    const transformedData = results.map(prop => ({
+                        id: prop.id || `rentcast_${Math.random()}`,
+                        title: prop.address?.street || `${prop.bedrooms || 2} Bedroom Property`,
+                        location: `${prop.address?.city || 'Nairobi'}, Kenya`,
+                        price: prop.rentalPrice || prop.price || 1500,
+                        description: prop.description || `${prop.bedrooms || 2} bed, ${prop.bathrooms || 2} bath property in ${prop.address?.city || 'Nairobi'}. Modern amenities included.`,
+                        imageUrl: `https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800`,
+                        bedrooms: prop.bedrooms,
+                        bathrooms: prop.bathrooms,
+                        source: 'RentCast'
+                    }));
+                    setProperties(transformedData);
+                } else {
+                    // Fallback to Firebase if RentCast returns nothing
+                    await fetchFromFirebase();
+                }
+            } catch (error) {
+                console.error("RentCast error, falling back to Firebase:", error);
+                // Fallback to Firebase on error
+                await fetchFromFirebase();
+            } finally {
+                setLoading(false);
+            }
+        };
+        
+        const fetchFromFirebase = async () => {
             try {
                 const querySnapshot = await getDocs(collection(db, "rentals"));
                 const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setProperties(data);
             } catch (error) {
                 console.error("Error fetching properties:", error);
-            } finally {
-                setLoading(false);
             }
         };
+        
         fetchProperties();
     }, []);
 
@@ -41,7 +73,7 @@ function PropertyList() {
                 <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
                     <div>
                         <h1 className="text-4xl font-black text-white tracking-tight">Available Rentals</h1>
-                        <p className="text-gray-300">Discover your next home in Nairobi</p>
+                        <p className="text-gray-300">Discover your next home across the country...</p>
                     </div>
                     
                     <div className="w-full md:w-96">
@@ -60,14 +92,18 @@ function PropertyList() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredProperties.map(p => (
                             <div key={p.id} className="group bg-white/10 backdrop-blur-lg border border-white/20 rounded-[32px] overflow-hidden hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
-                                {/* Property Image Placeholder */}
+                                {/* Property Image */}
                                 <div className="h-56 bg-gradient-to-br from-gray-700 to-gray-900 relative">
                                     <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-1 rounded-full font-bold shadow-lg">
-                                        ${p.price}
+                                        ${typeof p.price === 'number' ? p.price.toLocaleString() : p.price}
                                     </div>
-                                    <div className="flex items-center justify-center h-full text-white/20 italic">
-                                        Premium Listing
-                                    </div>
+                                    {p.imageUrl ? (
+                                        <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="flex items-center justify-center h-full text-white/20 italic">
+                                            Premium Listing
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="p-6">

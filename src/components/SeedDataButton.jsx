@@ -24,7 +24,7 @@ const SAMPLE_PROPERTIES = [
         bathrooms: 2,
         type: "Apartment",
         description: "Luxury 2-bedroom apartment in Westlands with panoramic city views. Includes gym, pool, and concierge service.",
-        imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800",
+        imageUrl: `https://picsum.photos/800/600?random=${Math.random()}`,
         createdAt: new Date()
     },
     {
@@ -108,7 +108,7 @@ function SeedDataButton() {
                 console.log(`Added: ${property.title}`);
             }
             
-            setMessage(`✅ Successfully added ${newProperties.length} properties with specific Nairobi addresses!`);
+            setMessage(` Successfully added ${newProperties.length} properties with specific Nairobi addresses!`);
             
             // Refresh the page after 2 seconds
             setTimeout(() => {
@@ -117,7 +117,7 @@ function SeedDataButton() {
             
         } catch (error) {
             console.error("Error seeding data:", error);
-            setMessage(`❌ Error: ${error.message}`);
+            setMessage(` Error: ${error.message}`);
         } finally {
             setLoading(false);
         }
@@ -134,7 +134,7 @@ function SeedDataButton() {
                         : 'bg-green-600 hover:bg-green-700 text-white'
                 }`}
             >
-                {loading ? 'Adding Properties...' : '🏠 Add Sample Nairobi Properties'}
+                {loading ? 'Adding Properties...' : ' Add Sample Nairobi Properties'}
             </button>
             {message && (
                 <p className={`mt-2 text-sm ${message.includes('✅') ? 'text-green-400' : 'text-yellow-400'}`}>

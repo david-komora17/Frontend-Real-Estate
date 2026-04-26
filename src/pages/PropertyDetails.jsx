@@ -54,7 +54,7 @@ function PropertyDetails() {
                     <div className="p-8">
                         <h1 className="text-4xl font-bold text-white">{property.title}</h1>
                         <p className="text-blue-400 text-xl mt-2 flex items-center gap-2">
-                            📍 {property.address || property.location}
+                             {property.address || property.location}
                         </p>
                         <div className="mt-6 grid grid-cols-2 gap-4 py-4 border-y border-white/20">
                             <div>
@@ -72,7 +72,7 @@ function PropertyDetails() {
                             onClick={handleBookViewing}
                             className="mt-8 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all shadow-xl text-lg"
                         >
-                            📅 Book a Viewing
+                             Book a Viewing
                         </button>
                     </div>
                 </div>

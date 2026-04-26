@@ -5,14 +5,14 @@ import image from '../assets/bathroom1.jpg';
 function Home() {
   return (
     <div 
-      className='relative min-h-screen flex items-center justify-center bg-cover bg-center bg-fixed' 
+      className='relative min-h-screen flex items-center justify-center bg-cover bg-no-repeat bg-center ' 
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Dark Overlay for Depth */}
       <div className="absolute inset-0 bg-black/40 z-0"></div>
 
       {/* Main Glass Container */}
-      <div className="relative z-10 max-w-2xl w-full mx-4 p-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[40px] shadow-2xl text-center">
+      <div className="relative z-10 max-w-2xl w-full mx-4 my-20 p-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[40px] shadow-2xl text-center md:p-12">
         
         <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-4">
           Welcome to <br />

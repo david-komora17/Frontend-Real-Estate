@@ -20,53 +20,60 @@ function Navbar() {
         }
     };
 
+    // Standard link style for consistency
+    const linkStyle = "text-white/80 hover:text-white font-semibold transition-all duration-300 text-sm uppercase tracking-wider";
+
     return (
-        <nav className="fixed top-0 w-full z-50 bg-white/10 backdrop-blur-xl border-b border-white/10 px-8 py-4 shadow-2xl">
+        <nav className="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10 px-8 py-4 shadow-2xl">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 
                 {/* Brand / Logo */}
-                <Link to="/" className="text-2xl font-black text-purple tracking-tighter hover:opacity-80 transition">
-                    REALTY<span className="text-blue-500 font-light italic">App</span>
+                <Link to="/" className="text-2xl font-black text-white tracking-tighter hover:scale-105 transition-transform">
+                    REALTY<span className="text-blue-400 font-light italic">App</span>
                 </Link>
 
                 {/* Navigation Menu */}
                 <div className="flex items-center space-x-8">
                     {/* Public Link */}
-                    <Link to="/properties" className="text-black-200 hover:text-white font-medium transition text-sm uppercase tracking-wider">
+                    <Link to="/properties" className={linkStyle}>
                         Browse Homes
                     </Link>
 
                     {/* Authenticated Links */}
                     {user ? (
                         <>
-                            <Link to="/dashboard" className="text-gray-200 hover:text-white font-medium transition text-sm uppercase tracking-wider">
+                            <Link to="/dashboard" className={linkStyle}>
                                 My Portal
                             </Link>
 
-                            {/* Logic: Only David/Admin sees "Manage" */}
+                            <Link to="/my-bookings" className={linkStyle}>
+                                My Bookings
+                            </Link>
+
+                            {/* Admin Telemetry Link */}
                             {role === 'admin' && (
-                                <Link to="/listings" className="text-purple-300 hover:text-purple-100 font-bold transition text-sm uppercase tracking-wider">
-                                    Manage Listings
+                                <Link to="/all-bookings" className="text-purple-400 hover:text-purple-300 font-bold transition text-sm uppercase tracking-wider">
+                                    Telemetry
                                 </Link>
                             )}
 
                             {/* Logout Action */}
                             <button 
                                 onClick={handleLogout}
-                                className="bg-red-500/20 border border-red-500/50 px-6 py-2 rounded-xl text-red-200 font-bold hover:bg-red-500/40 transition"
+                                className="bg-red-500/10 border border-red-500/30 px-5 py-2 rounded-xl text-red-400 text-xs font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all duration-300"
                             >
                                 Sign Out
                             </button>
                         </>
                     ) : (
-                        /* Logged Out Link */
-                        <Link to="/login" className="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-lg text-sm">
+                        <Link to="/login" className="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-500 transition shadow-[0_0_20px_rgba(37,99,235,0.3)] text-sm">
                             Agent Login
                         </Link>
                     )}
                 </div>
             </div>
         </nav>
+        
     );
 }
 
