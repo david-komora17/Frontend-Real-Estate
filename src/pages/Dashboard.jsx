@@ -51,9 +51,14 @@ function Dashboard() {
                                 </Link>
                             )}
 
-                            <Link to="/my-bookings" className="p-4 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition text-center font-bold">
-                                My Bookings
-                            </Link>
+                            {role !== 'admin' && (
+                                <Link 
+                                    to="/my-bookings" 
+                                    className="p-4 bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition text-center font-bold"
+                                >
+                                    My Bookings
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>

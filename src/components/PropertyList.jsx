@@ -10,51 +10,25 @@ function PropertyList() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProperties = async () => {
-            setLoading(true);
-            
-            // Try RentCast API first (silent background)
-            try {
-                const results = await searchRentals('Nairobi, Kenya', 500, 5000);
-                
-                if (results && results.length > 0) {
-                    const transformedData = results.map(prop => ({
-                        id: prop.id || `rentcast_${Math.random()}`,
-                        title: prop.address?.street || `${prop.bedrooms || 2} Bedroom Property`,
-                        location: `${prop.address?.city || 'Nairobi'}, Kenya`,
-                        price: prop.rentalPrice || prop.price || 1500,
-                        description: prop.description || `${prop.bedrooms || 2} bed, ${prop.bathrooms || 2} bath property in ${prop.address?.city || 'Nairobi'}. Modern amenities included.`,
-                        imageUrl: `https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800`,
-                        bedrooms: prop.bedrooms,
-                        bathrooms: prop.bathrooms,
-                        source: 'RentCast'
-                    }));
-                    setProperties(transformedData);
-                } else {
-                    // Fallback to Firebase if RentCast returns nothing
-                    await fetchFromFirebase();
-                }
-            } catch (error) {
-                console.error("RentCast error, falling back to Firebase:", error);
-                // Fallback to Firebase on error
-                await fetchFromFirebase();
-            } finally {
-                setLoading(false);
-            }
-        };
-        
-        const fetchFromFirebase = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, "rentals"));
-                const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setProperties(data);
-            } catch (error) {
-                console.error("Error fetching properties:", error);
-            }
-        };
-        
-        fetchProperties();
-    }, []);
+    const fetchFromFirebase = async () => {
+        setLoading(true);
+        try {
+            const querySnapshot = await getDocs(collection(db, "rentals"));
+            const data = querySnapshot.docs.map(doc => ({ 
+                id: doc.id, 
+                ...doc.data() 
+            }));
+            // Sort by latest created if needed
+            setProperties(data.sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds));
+        } catch (error) {
+            console.error("Error fetching properties:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    
+    fetchFromFirebase();
+}, []);
 
     // Simple search filter
     const filteredProperties = properties.filter(p => 

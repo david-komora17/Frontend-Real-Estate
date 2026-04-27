@@ -79,7 +79,6 @@ function AllBookings() {
                             {bookings.map((b) => (
                                 <tr key={b.id} className="hover:bg-white/5 transition-colors group">
                                     <td className="p-6">
-                                        <p className="font-bold text-blue-100">{b.userName || "Unknown User"}</p>
                                         <p className="text-xs text-gray-500">{b.userEmail}</p>
                                     </td>
                                     <td className="p-6">

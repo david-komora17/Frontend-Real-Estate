@@ -36,19 +36,21 @@ function Navbar() {
                 <div className="flex space-x-8 items-center pt-2">
                     {/* Public Link */}
                     <Link to="/properties" className={linkStyle}>
-                        Browse Homes
+                         Homes
                     </Link>
 
                     {/* Authenticated Links */}
                     {user ? (
                         <>
                             <Link to="/dashboard" className={linkStyle}>
-                                My Portal
+                                Portal
                             </Link>
 
-                            <Link to="/my-bookings" className={linkStyle}>
-                                My Bookings
-                            </Link>
+                            {role !== 'admin' && (
+                                <Link to="/my-bookings" className={linkStyle}>
+                                    My Bookings
+                                </Link>
+                            )}
 
                             {/* Admin Telemetry Link */}
                             {role === 'admin' && (

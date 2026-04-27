@@ -10,11 +10,13 @@ import BookingCalendar from "./components/BookingCalendar";
 import PropertyList from "./components/PropertyList";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import MyBookings from "./pages/MyBookings";
 import AllBookings from "./pages/AllBookings";
 
 function App() {
     return (
+        
         <AuthProvider>
             <Navbar />
             <main className="pt-20">
@@ -43,7 +45,9 @@ function App() {
                     </Route>
                 </Routes>
             </main>
+            <Footer />
         </AuthProvider>
+        
     );
 }
 

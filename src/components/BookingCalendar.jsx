@@ -37,7 +37,7 @@ function BookingCalendar() {
         e.preventDefault();
         
         if (!propertyId) {
-            alert("Please select a property first. Go to Properties and click 'View Details' on a listing.");
+            alert("Please select a property first. Go to Homes and click 'View Details' on a listing.");
             return;
         }
         
